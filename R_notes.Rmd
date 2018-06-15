@@ -1,0 +1,262 @@
+---
+title: Annotated list of R functions
+date: June 22, 2018
+documentclass: article
+geometry: margin=1in
+fontsize: 11pt
+output:
+  html_document:
+    highlight: tango
+    self_contained: false
+  pdf_document:
+    highlight: tango
+  github_document:
+    html_preview: false
+---
+
+```{r setup, include = FALSE}
+# DO NOT ALTER THIS CHUNK
+# Set knitr options
+knitr::opts_chunk$set(
+  echo = TRUE, eval = TRUE, fig.width = 5, warning = FALSE,
+  fig.asp = 0.618, out.width = "80%", dpi = 120,
+  fig.align = "center", cache = FALSE, message = FALSE
+)
+# Load required packages
+suppressPackageStartupMessages(library(tidyverse))
+suppressPackageStartupMessages(library(rvest))
+suppressPackageStartupMessages(library(infer))
+suppressPackageStartupMessages(library(modelr))
+# Source helper functions
+load(url("http://summer18.cds101.com/files/R/bootstrap_cohens_d.RData"))               # Cohen's d bootstrap
+load(url("http://summer18.cds101.com/files/R/repeated_kfold_cross_validation.RData"))  # k-fold cross-validation
+# Fetch datasets hosted on course website
+rail_trail <- read_rds(url("http://summer18.cds101.com/files/datasets/rail_trail.rds"))
+titanic <- read_csv("http://summer18.cds101.com/files/datasets/titanic_dataset.csv")
+county <- read_rds(url("http://summer18.cds101.com/files/datasets/county_complete.rds"))
+yawn <- read_csv("http://summer18.cds101.com/files/datasets/yawn.csv")
+nsfg6 <- read_rds(url("http://summer18.cds101.com/files/datasets/2002FemPreg.rds"))
+mariokart <- read_rds(url("http://summer18.cds101.com/files/datasets/mariokart.rds"))
+housing_train <- read_rds(url("http://summer18.cds101.com/files/datasets/housing_train.rds"))
+housing_test <- read_rds(url("http://summer18.cds101.com/files/datasets/housing_test.rds"))
+# Set seed
+set.seed(5802)
+```
+
+## Basic R functions
+
+We rely on the `tidyverse` ecosystem do our work in the course, but there are also a couple of `base` R functions that we use.
+The following are a few of the most common ones.
+
+### `c()`
+
+
+
+
+### `nrow()`
+
+
+
+
+## Visualization
+
+We used the `ggplot2` package to create all our visualizations for CDS-101.
+This package is an implementation of the ["grammar of graphics"](https://www.cs.uic.edu/~wilkinson/TheGrammarOfGraphics/GOG.html) outlined by Leland Wilkinson, which allows us to build a figure using a sentence-like structure.
+
+### General syntax
+
+[The general template for any visualization](http://r4ds.had.co.nz/data-visualisation.html#the-layered-grammar-of-graphics) that we can create using `ggplot2` is as follows:
+
+```r
+ggplot(data = <DATA>) + 
+  <GEOM_FUNCTION>(
+     mapping = aes(<MAPPINGS>),
+     stat = <STAT>, 
+     position = <POSITION>
+  ) +
+  <COORDINATE_FUNCTION> +
+  <FACET_FUNCTION>
+```
+
+The above template contains two `ggplot2` functions that are always used when creating a visualization, `ggplot()` and `aes()`.
+These functions mean the following:
+
+*   `ggplot()`: Creates the plot window for a `ggplot2`-based figure.
+
+    *   `data`: The default dataset to use for creating plots.
+
+*   `aes()`: Short for *aesthetic mapping*, this is used for specifying which columns in the dataset will be used and how they will be visualized. The inputs listed below are what can be used in `<MAPPINGS>` (see discussion below).
+
+    *   `x` and `y`: The dataset columns to use for the horizontal and vertical axes when creating a plot (see discussion of `<GEOM_FUNCTION>` term below). The *y* input is optional for single variable (one-dimensional) geoms.
+
+    *   `color`: A column for grouping the data passed to the `x` and `y` inputs. Groups will show up as different colors (in bar charts, this only changes the bar outline).
+
+    *   `fill`: A column for grouping the data passed to the `x` and `y` inputs. Only useful for objects with a fillable area, such as bar charts. Groups will show up as filled areas of different colors.
+
+    *   `shape`: A column for grouping the data passed to the `x` and `y` inputs. If the geom in `<GEOM_FUNCTION>` can use different shapes, such as a point plot, then groups will show up as different shapes.
+
+    *   `size`:  A column for grouping the data passed to the `x` and `y` inputs. If the geom in `<GEOM_FUNCTION>` can be varied in size, such as a point plot, then groups will be plotted as different size objects.
+
+    *   `alpha`: A column for grouping the data passed to the `x` and `y` inputs. If the transparency of the geom in `<GEOM_FUNCTION>` can be altered, such as a point plot, then groups will be plotted as objects with different levels of transparency.
+
+The terms in angular brackets are placeholders for functions in the `ggplot2` package and have the following meanings:
+
+---------------------------------------------------------------------------------------------------
+Placeholder              Description
+------------------------ --------------------------------------------------------------------------
+`<DATA>`                 An R variable that stores a dataset in the `data.frame` or `tibble`
+                         format.
+
+`<GEOM_FUNCTION>`        A class of functions in `ggplot2` that define geometrical shapes that are
+                         used to visually represent data. These functions are sometimes referred to
+                         as **geoms**.
+
+`<MAPPINGS>`             The aesthetic mappings passed to `aes()` that tell `ggplot2` which columns
+                         to use when plotting different geoms.
+
+`<STAT>`                 A statistical transformation function that changes the inputted data into
+                         a new format before a geom creates a plot. Each geom has a default
+                         `<STAT>` function.
+
+`<POSITION>`             Tells `ggplot2` how to handle overlapping geoms due to overlapping data.
+                         Common inputs for this include `"identity"`,`"dodge"`, `"stack"`,
+                         `"fill"`, and `"jitter"`.
+
+`<COORDINATE_FUNCTION>`  Defines the coordinate axes used when creating the plot.
+
+`<FACET_FUNCTION>`       A function that uses a categorical variable to subdivide the data and
+                         creates a figure with the groups sorted into panels.
+---------------------------------------------------------------------------------------------------
+
+The first two function terms, `ggplot()` and `<GEOM_FUNCTION>`, are mandatory for creating a figure, while the other terms, `<COORDINATE_FUNCTION>` and `<FACET_FUNCTION>` are optional.
+
+### `geom_histogram()`
+
+Geom that creates a histogram for a single variable.
+
+#### Notes on aesthetic mappings
+
+*   `y`: (optional) If not specified, `ggplot2` creates a frequency histogram, where the bar heights are equal to number of data points in each bin. Specifying `y = ..density..` creates a probability mass function (PMF) histogram, where the bar heights correspond to a probability.
+
+*   `fill`: If grouping data into categories, it's recommended to pass the categorical variable name to `fill` so that the groups show up as different color bars.
+
+#### Notes on inputs
+
+*   `bins` and `binwidth`: Used to control the width of each bin in the histogram. The two settings are mutally exclusive, so only use one. `ggplot2` uses `bins = 30` by default. If there are too many bins, then the shape of the distribution can be lost. If there are too few bins, then variations in the data (even meaningful ones) are smoothed out.
+
+*   `fill`: Sets the filled bar color of the histogram if used *outside* of the aesthetic mappings.
+
+*   `color`: Sets the outline color for each bar of the histogram if used *outside* of the aesthetic mappings.
+
+*   `position`: If you grouped the data in the aesthetic mappings, `"stack"` is the default and places groups in each bin on top of each other, `"fill"` is like `"stack"` except the stacked bars are scaled to all have the same height for comparing proportions, `"dodge"` puts bars side-by-side, and `"identity"` overlaps the bars.
+
+*   `alpha`: If you use `position = "identity"`, you will want to set `alpha` to be a decimal between 0 and 1. This controls the transparency of each histogram, so that you can see bars that are overlapping. In such cases, `alpha = 0.5` should be sufficient.
+
+#### Example
+
+The following example based on the `iris` dataset shows how to create a histogram that groups a variable using `fill`, overlaps the bars using `position = "identity"`, and adjusts the transparency using `alpha = 0.6` in order to see the different distributions.
+
+```{r iris-histogram-example}
+ggplot(data = iris) +
+  geom_histogram(mapping = aes(x = Sepal.Length, y = ..density.., fill = Species),
+                 bins = 20, position = "identity", alpha = 0.6)
+```
+
+### `geom_bar()`
+
+
+
+
+### `geom_col()`
+
+
+
+
+### `geom_point()`
+
+
+
+
+### `geom_smooth()`
+
+
+
+
+### `geom_qq()`
+
+
+
+
+### `facet_wrap()`
+
+
+
+
+### `facet_grid()`
+
+
+
+
+### How to title your plot and change the axes labels
+
+
+
+
+## Data wrangling
+
+### `readr` package
+
+
+
+
+### `dplyr` package
+
+
+
+
+### `tibble` package
+
+
+
+
+### `tidyr` package
+
+
+
+
+### `rvest` package
+
+
+
+
+## Statistics
+
+### Summary statistics
+
+
+
+
+### Percentiles using `quantile()`
+
+
+
+
+### Extracting cumulative distribution function (CDF) values
+
+
+
+
+### `infer` package
+
+
+
+
+### Linear modeling
+
+
+
+
+### `modelr` package
+
+
+

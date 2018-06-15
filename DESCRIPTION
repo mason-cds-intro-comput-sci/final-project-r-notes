@@ -1,0 +1,10 @@
+Title: Final Project — Annotated List of R Functions
+Date: 2018-06-15
+Depends:
+  R (>= 3.4)
+Imports:
+  tidyverse,
+  rvest,
+  modelr,
+  infer,
+  nycflights13
