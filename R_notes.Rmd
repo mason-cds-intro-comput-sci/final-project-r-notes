@@ -43,22 +43,7 @@ housing_test <- read_rds(url("http://summer18.cds101.com/files/datasets/housing_
 set.seed(5802)
 ```
 
-## Basic R functions
-
-We rely on the `tidyverse` ecosystem do our work in the course, but there are also a couple of `base` R functions that we use.
-The following are a few of the most common ones.
-
-### `c()`
-
-
-
-
-### `nrow()`
-
-
-
-
-## Visualization
+## `ggplot2` package
 
 We used the `ggplot2` package to create all our visualizations for CDS-101.
 This package is an implementation of the ["grammar of graphics"](https://www.cs.uic.edu/~wilkinson/TheGrammarOfGraphics/GOG.html) outlined by Leland Wilkinson, which allows us to build a figure using a sentence-like structure.
@@ -162,6 +147,16 @@ ggplot(data = iris) +
                  bins = 20, position = "identity", alpha = 0.6)
 ```
 
+### `geom_boxplot()`
+
+
+
+
+### `geom_point()`
+
+
+
+
 ### `geom_bar()`
 
 
@@ -172,17 +167,12 @@ ggplot(data = iris) +
 
 
 
-### `geom_point()`
+### `stat_ecdf()`
 
 
 
 
 ### `geom_smooth()`
-
-
-
-
-### `geom_qq()`
 
 
 
@@ -202,61 +192,196 @@ ggplot(data = iris) +
 
 
 
-## Data wrangling
+## `readr` package
 
-### `readr` package
-
-
-
-
-### `dplyr` package
+### `read_csv()`
 
 
 
 
-### `tibble` package
+### `write_csv()`
 
 
 
 
-### `tidyr` package
+### `read_rds()`
 
 
 
 
-### `rvest` package
+### `write_rds()`
 
 
 
 
-## Statistics
+## `dplyr` package
 
-### Summary statistics
-
-
-
-
-### Percentiles using `quantile()`
+### `combine()`
 
 
 
 
-### Extracting cumulative distribution function (CDF) values
+### `pull()`
 
 
 
 
-### `infer` package
+### `arrange()`
 
 
 
 
-### Linear modeling
+### `select()`
 
 
 
 
-### `modelr` package
+### `rename()`
+
+
+
+
+### `slice()`
+
+
+
+
+### `filter()`
+
+
+
+
+### `mutate()`
+
+
+
+
+### `recode()`
+
+
+
+
+### `cume_dist()`
+
+
+
+
+### `group_by()` and `summarize()`
+
+
+
+
+### `count()`
+
+
+
+
+## `tibble` package
+
+### How to use `data_frame()` to build a data frame manually
+
+
+
+
+## `tidyr` package
+
+### `gather()`
+
+
+
+
+### `spread()`
+
+
+
+
+### `separate()`
+
+
+
+
+###`unite()`
+
+
+
+
+## `rvest` package
+
+### How to fetch the webpage and save the HTML for offline access with `read_html()` and `write_html()`
+
+
+
+
+### Scraping data using the [SelectorGadget extension][selectorgadget-tool] with `html_nodes()` and `html_text()`
+
+
+
+
+## Summary statistics functions: `mean()`, `median()`, `sd()`, `IQR()`, `min()`, `max()`
+
+
+
+
+## Linear models: `lm()`
+
+
+
+
+## Making a Q-Q plot with a **reference line**: `geom_qq()`
+
+
+
+
+## `infer` package
+
+### Inputs for `specify()`
+
+
+
+
+### Inputs for `hypothesize()`
+
+
+
+
+### Inputs for `generate()`
+
+
+
+
+### Inputs for `calculate()`
+
+
+
+
+### Example of how to perform a hypothesis test
+
+
+
+
+### Example of how to calculate confidence intervals
+
+
+
+
+## `modelr` package
+
+### Example of how to plot a univariate linear model in a scatter plot
+
+
+
+
+### Example of how to create an *observed versus predicted values* plot
+
+
+
+
+### Example of how to create an`*residual versus predicted values* plot
+
+
+
+
+### Example of how to evaluating the conditions for linearity
 
 
 
