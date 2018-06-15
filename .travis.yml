@@ -10,6 +10,6 @@ notifications:
     on_failure: always
     on_success: never
 script:
-- make R_notes.md
 - make R_notes.pdf
+- make R_notes.md
 - make R_notes.html

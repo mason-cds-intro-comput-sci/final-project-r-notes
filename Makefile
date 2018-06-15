@@ -20,9 +20,9 @@ HTML_EXT								=		%.html : %.Rmd
 PDF_EXT									=		%.pdf : %.Rmd
 MD_EXT									=		%.md : %.Rmd
 
-ALL_FILES								=		$(MD)							\
-												$(HTML)							\
-												$(PDF)
+ALL_FILES								=		$(PDF)							\
+												$(MD)							\
+												$(HTML)
 
 CLEAN_FILES								=		*_files/						\
 												*_cache/						\
