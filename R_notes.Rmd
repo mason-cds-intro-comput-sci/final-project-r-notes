@@ -312,7 +312,7 @@ ggplot(data = iris) +
 
 
 
-### Scraping data using the [SelectorGadget extension][selectorgadget-tool] with `html_nodes()` and `html_text()`
+### Scraping data using the SelectorGadget extension with `html_nodes()` and `html_text()`
 
 
 
