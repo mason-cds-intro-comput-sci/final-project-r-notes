@@ -1,6 +1,8 @@
 Final Project — Annotated List of R Functions
 =============================================
 
+> As part of the final project, you and your classmates will put together an annotated list of R functions.
+
 -   [Mandatory deadlines](#mandatory-deadlines)
 -   [Guidelines](#final-project-guidelines)
     -   [Annotating the R functions](#annotating-the-r-functions)
@@ -10,11 +12,11 @@ Final Project — Annotated List of R Functions
 Mandatory deadlines
 -------------------
 
--   **Annotations first draft:** 12:00pm noon on Thursday, June 21st
+-   **Annotations first draft:** Time on Date 1
 
--   **Peer reviews:** 6:00pm on Thursday, June 21st
+-   **Peer reviews:** Time on Date 2
 
--   **Annotations final draft:** 9:00am on Friday, June 22nd
+-   **Annotations final draft:** Time on Date 3
 
 Read the section [**merging into the master branch**](#merging-into-the-master-branch) for instructions on the peer review process.
 
@@ -117,9 +119,9 @@ Students will complete their annotations in separate branches of the final proje
 
 **You will need to replace `@username` with your reviewer's actual Github username.** You should also send your reviewer a direct message on Slack or email him or her to begin the review. After you receive your feedback, you will use the suggestions to update and correct your submission. After your edits are complete and commited to your branch, message the instructor on Slack to check to see that you've satisfied the reviewer's comments. If you have, the instructor will approve the merge and add your contribution to the master version of the document.
 
--   **First drafts of your annotations must be commited to your branch by 12:00pm noon on Thursday, June 21st**
+-   **First drafts of your annotations must be commited to your branch by Time on Date 1**
 
--   **Peer reviews must be completed by 6:00pm on Thursday, June 21st**
+-   **Peer reviews must be completed by Time on Date 2**
 
--   **Final edits should be commited no later than 9:00am on Friday, June 22nd.**
+-   **Final edits should be commited no later than Time on Date 3**
 

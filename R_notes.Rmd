@@ -1,26 +1,26 @@
 ---
 title: Annotated list of R functions
-date: June 22, 2018
+author: "Group members names"
+date: "`r Sys.Date()`"
 documentclass: article
 geometry: margin=1in
 fontsize: 11pt
-output:
-  html_document:
-    highlight: tango
-    self_contained: false
-  pdf_document:
-    highlight: tango
-  github_document:
-    html_preview: false
 ---
 
 ```{r setup, include = FALSE}
 # DO NOT ALTER THIS CHUNK
 # Set knitr options
 knitr::opts_chunk$set(
-  echo = TRUE, eval = TRUE, fig.width = 5, warning = FALSE,
-  fig.asp = 0.618, out.width = "80%", dpi = 120,
-  fig.align = "center", cache = FALSE, message = FALSE
+  echo = TRUE,
+  eval = TRUE,
+  cache = FALSE,
+  warning = FALSE,
+  message = FALSE,
+  fig.width = 5,
+  fig.asp = 0.618,
+  fig.align = "center",
+  out.width = "80%",
+  dpi = 120
 )
 # Load required packages
 suppressPackageStartupMessages(library(tidyverse))
@@ -28,17 +28,17 @@ suppressPackageStartupMessages(library(rvest))
 suppressPackageStartupMessages(library(infer))
 suppressPackageStartupMessages(library(modelr))
 # Source helper functions
-load(url("http://summer18.cds101.com/files/R/bootstrap_cohens_d.RData"))               # Cohen's d bootstrap
-load(url("http://summer18.cds101.com/files/R/repeated_kfold_cross_validation.RData"))  # k-fold cross-validation
+load("src/bootstrap_cohens_d.RData")               # Cohen's d bootstrap
+source("src/repeated_kfold_cross_validation.R")  # k-fold cross-validation
 # Fetch datasets hosted on course website
-rail_trail <- read_rds(url("http://summer18.cds101.com/files/datasets/rail_trail.rds"))
-titanic <- read_csv("http://summer18.cds101.com/files/datasets/titanic_dataset.csv")
-county <- read_rds(url("http://summer18.cds101.com/files/datasets/county_complete.rds"))
-yawn <- read_csv("http://summer18.cds101.com/files/datasets/yawn.csv")
-nsfg6 <- read_rds(url("http://summer18.cds101.com/files/datasets/2002FemPreg.rds"))
-mariokart <- read_rds(url("http://summer18.cds101.com/files/datasets/mariokart.rds"))
-housing_train <- read_rds(url("http://summer18.cds101.com/files/datasets/housing_train.rds"))
-housing_test <- read_rds(url("http://summer18.cds101.com/files/datasets/housing_test.rds"))
+rail_trail <- read_rds("data/rail_trail.rds")
+titanic <- read_csv("data/titanic_dataset.csv")
+county <- read_rds("data/county_complete.rds")
+yawn <- read_csv("data/yawn.csv")
+nsfg6 <- read_rds("data/2002FemPreg.rds")
+mariokart <- read_rds("data/mariokart.rds")
+housing_train <- read_rds("data/housing_train.rds")
+housing_test <- read_rds("data/housing_test.rds")
 # Set seed
 set.seed(5802)
 ```

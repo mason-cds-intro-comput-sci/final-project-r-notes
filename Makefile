@@ -8,9 +8,10 @@ R										=		R
 RSCRIPT									=		Rscript
 ROPTS									=		--slave
 
-HTML									=		R_notes.html
-PDF										=		R_notes.pdf
-MD										=		R_notes.md
+RMD_FILENAME							=		R_notes
+HTML									=		$(RMD_FILENAME).html
+PDF										=		$(RMD_FILENAME).pdf
+MD										=		$(RMD_FILENAME).md
 
 HTML_OUTPUT								=		html_document
 PDF_OUTPUT								=		pdf_document
